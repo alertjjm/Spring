@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="exam" class="org.example.springpractice.NewlecExam">
+        <property name="kor" value="20"/>
+        <property name="eng" value="20"/>
+        <property name="math" value="20"/>
+        <property name="com" value="20"/>
+
+    </bean>
+    <bean id="console" class="org.example.springpractice.GridConsole">
+        <property name="exam" ref="exam"/>
+    </bean>
+</beans>
