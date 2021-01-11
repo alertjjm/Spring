@@ -7,6 +7,8 @@ import static org.junit.Assert.assertThat;
 
 import java.sql.SQLException;
 import org.junit.Test;
+import org.springframework.dao.EmptyResultDataAccessException;
+
 public class UserDaoTest {
     @Test
     public void andAndGet() throws SQLException, ClassNotFoundException {
