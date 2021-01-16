@@ -1,11 +1,12 @@
 package com.example.tacocloud;
 
+import com.example.tacocloud.Model.Ingredient;
 import com.example.tacocloud.Repository.IngredientRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import com.example.tacocloud.Ingredient.Type;
+import com.example.tacocloud.Model.Ingredient.Type;
 @SpringBootApplication
 public class TacocloudApplication {
 

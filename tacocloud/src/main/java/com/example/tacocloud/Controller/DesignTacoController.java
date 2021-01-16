@@ -1,21 +1,20 @@
 package com.example.tacocloud.Controller;
 
-import com.example.tacocloud.Ingredient;
-import com.example.tacocloud.Order;
+import com.example.tacocloud.Model.Ingredient;
+import com.example.tacocloud.Model.Order;
 import com.example.tacocloud.Repository.IngredientRepository;
 import com.example.tacocloud.Repository.TacoRepository;
-import com.example.tacocloud.Taco;
+import com.example.tacocloud.Model.Taco;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import com.example.tacocloud.Ingredient.Type;
+import com.example.tacocloud.Model.Ingredient.Type;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
