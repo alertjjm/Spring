@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
     @Autowired
     IngredientRepository ingredientRepo;
     @Override
     public Ingredient convert(String source) {
-        return ingredientRepo.findById(source);
+        Optional<Ingredient> optionalIngredient=ingredientRepo.findById(source);
+        return optionalIngredient.isPresent()?optionalIngredient.get():null;
     }
 }
