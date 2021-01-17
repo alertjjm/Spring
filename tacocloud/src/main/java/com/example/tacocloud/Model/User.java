@@ -32,7 +32,7 @@ public class User implements UserDetails {
     private final String city;
     private final String state;
     private final String zip;
-    private final String phoneNumber;
+    private final String phone;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
