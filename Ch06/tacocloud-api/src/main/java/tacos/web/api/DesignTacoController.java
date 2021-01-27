@@ -47,7 +47,7 @@ public class DesignTacoController {
  */
   @GetMapping("/recent")
   public Flux<Taco> recentTacos() {                 //<2>
-    return Flux.fromIterable(tacoRepo.findAll()).take(12);
+    return tacoRepo.findAll().take(12);
   }
 /*
   @PostMapping(consumes="application/json")
@@ -63,12 +63,8 @@ public class DesignTacoController {
   }
   
   @GetMapping("/{id}")
-  public Taco tacoById(@PathVariable("id") Long id) {
-    Optional<Taco> optTaco = tacoRepo.findById(id);
-    if (optTaco.isPresent()) {
-      return optTaco.get();
-    }
-    return null;
+  public Mono<Taco> tacoById(@PathVariable("id") Long id) {
+    return tacoRepo.findById(id);
   }
 }
 //end::recents[]
