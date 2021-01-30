@@ -20,15 +20,16 @@ public class EmployeeController {
     }
     @PostMapping("/employees")
     public Employee newEmployee(@RequestBody Employee newEmployee) {
-        return repository.save(newEmployee);
+        Employee resultEmployee=repository.save(newEmployee);
+        System.out.println(repository.findAll());
+        return resultEmployee;
     }
 
     // Single item
 
     @GetMapping("/employees/{id}")
     public Employee one(@PathVariable Long id) {
-        Optional<Employee> employee=repository.findById(id);
-        return employee.isPresent()?employee.get():null;
+        return repository.findById(id).orElseThrow(()->new EmployeeNotFoundException(id));
     }
 
     @PutMapping("/employees/{id}")

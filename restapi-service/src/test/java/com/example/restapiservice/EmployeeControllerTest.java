@@ -11,7 +11,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.hamcrest.Matchers.*;
 
+import static org.mockito.ArgumentMatchers.contains;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -26,12 +29,14 @@ public class EmployeeControllerTest {
     private EmployeeRepository repository;
     @Test
     public void newEmployeeTest() throws Exception{
-        String param = objectMapper.writeValueAsString(new Employee(5L,"데일", "test"));
+        Employee newemployee=new Employee(5L,"dale", "test");
+        String param = objectMapper.writeValueAsString(newemployee);
+        when(repository.save(newemployee)).thenReturn(newemployee);
         mockMvc.perform(post("/employees")
         .content(param)
         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string("test"))
+                .andExpect(content().string("{\"id\":5,\"name\":\"dale\",\"role\":\"test\"}"))
                 .andDo(print());
     }
     @Test
