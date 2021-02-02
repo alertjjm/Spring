@@ -29,7 +29,7 @@ public class EmployeeControllerTest {
     private EmployeeRepository repository;
     @Test
     public void newEmployeeTest() throws Exception{
-        Employee newemployee=new Employee(5L,"dale", "test");
+        Employee newemployee=new Employee(5L,"conan","dale", "test");
         String param = objectMapper.writeValueAsString(newemployee);
         when(repository.save(newemployee)).thenReturn(newemployee);
         mockMvc.perform(post("/employees")

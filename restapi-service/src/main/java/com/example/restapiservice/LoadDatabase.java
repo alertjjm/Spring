@@ -13,7 +13,7 @@ public class LoadDatabase implements CommandLineRunner{
     EmployeeRepository repository;
     @Override
     public void run(String... args) throws Exception {
-        log.info("Preloading " + repository.save(new Employee("Bilbo Baggins", "burglar")));
-        log.info("Preloading " + repository.save(new Employee("Frodo Baggins", "thief")));
+        log.info("Preloading " + repository.save(new Employee("Bilbo","Baggins", "burglar")));
+        log.info("Preloading " + repository.save(new Employee("Frodo","Baggins", "thief")));
     }
 }
