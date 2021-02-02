@@ -1,14 +1,18 @@
 package com.example.restapiservice;
 
+import org.hibernate.EntityMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.hateoas.Link.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,14 +33,20 @@ public class EmployeeController {
                 .collect(Collectors.toList());
         return CollectionModel.of(employees,linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
     }
+    //Location: http://localhost:8080/employees/3 헤더가 포함된다
     @PostMapping("/employees")
-    public Employee newEmployee(@RequestBody Employee newEmployee) {
-        Employee resultEmployee=repository.save(newEmployee);
-        System.out.println(repository.findAll());
-        return resultEmployee;
+    public ResponseEntity<?> newEmployee(@RequestBody Employee newEmployee) {
+        EntityModel<Employee> entityModel=assembler.toModel(repository.save(newEmployee));
+        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
-
-    // Single item
+    /*
+    //일반적인 방법
+    @PostMapping("/employees")
+    public ResponseEntity<?> newEmployee(@RequestBody Employee newEmployee) {
+        EntityModel<Employee> entityModel=assembler.toModel(repository.save(newEmployee));
+        return new ResponseEntity<EntityModel<Employee>>(entityModel,HttpStatus.CREATED);
+    }
+    */
 
     @GetMapping("/employees/{id}")
     public EntityModel<Employee> one(@PathVariable Long id) {
@@ -45,23 +55,24 @@ public class EmployeeController {
     }
 
     @PutMapping("/employees/{id}")
-    public Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
-        Employee employee;
-        Optional<Employee> optionalEmployee=repository.findById(id);
-        if(optionalEmployee.isPresent()){
-            employee=optionalEmployee.get();
-            employee.setName(newEmployee.getName());
-            employee.setRole(newEmployee.getRole());
-            return repository.save(employee);
-        }
-        else{
-            newEmployee.setId(id);
-            return repository.save(newEmployee);
-        }
+    public ResponseEntity<?> replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
+        Employee employee=repository.findById(id)
+                .map(employee1 -> {
+                    employee1.setName(newEmployee.getName());
+                    employee1.setRole(newEmployee.getRole());
+                    return repository.save(employee1);
+                })
+                .orElseGet(()->{
+                    newEmployee.setId(id);
+                    return repository.save(newEmployee);
+                });
+        EntityModel<Employee> entityModel=assembler.toModel(employee);
+        return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
     }
 
     @DeleteMapping("/employees/{id}")
-    public void deleteEmployee(@PathVariable Long id) {
+    public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
         repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
