@@ -8,7 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
+//시큐리티 설정에서 loginProcessingUrl("/login")
+// login 요청이 오면 UserDetailsService 타입으로 IoC되어있는 loadByUsername 함수가 실행
 @Service
 public class PrincipalDetailsService implements UserDetailsService {
     @Autowired
