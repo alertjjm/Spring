@@ -1,4 +1,4 @@
-package com.example.restapiservice;
+package com.example.restapiservice.Employee;
 
 public class EmployeeNotFoundException extends RuntimeException{
     EmployeeNotFoundException(Long id){

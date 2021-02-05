@@ -1,4 +1,4 @@
-package com.example.restapiservice;
+package com.example.restapiservice.Employee;
 
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;

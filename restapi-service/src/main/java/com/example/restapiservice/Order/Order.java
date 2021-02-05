@@ -1,8 +1,7 @@
-package com.example.restapiservice;
+package com.example.restapiservice.Order;
+import com.example.restapiservice.Status;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,4 +14,9 @@ public class Order {
     private @Id @GeneratedValue Long id;
     private String description;
     private Status status;
+
+    public Order(String description, Status status) {
+        this.description=description;
+        this.status=status;
+    }
 }

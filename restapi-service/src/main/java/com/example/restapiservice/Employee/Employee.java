@@ -1,4 +1,4 @@
-package com.example.restapiservice;
+package com.example.restapiservice.Employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

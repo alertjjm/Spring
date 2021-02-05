@@ -1,4 +1,4 @@
-package com.example.restapiservice;
+package com.example.restapiservice.Order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

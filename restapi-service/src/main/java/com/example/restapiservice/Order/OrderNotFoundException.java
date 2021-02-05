@@ -1,4 +1,4 @@
-package com.example.restapiservice;
+package com.example.restapiservice.Order;
 
 public class OrderNotFoundException extends RuntimeException {
     public OrderNotFoundException(Long id) {

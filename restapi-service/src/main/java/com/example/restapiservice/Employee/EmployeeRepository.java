@@ -1,6 +1,6 @@
-package com.example.restapiservice;
+package com.example.restapiservice.Employee;
 
-import org.springframework.boot.test.mock.mockito.MockBean;
+import com.example.restapiservice.Employee.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

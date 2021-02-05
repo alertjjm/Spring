@@ -1,6 +1,7 @@
 package com.example.restapiservice;
 
-enum Status {
+
+public enum Status {
     IN_PROGRESS, //
     COMPLETED, //
     CANCELLED
