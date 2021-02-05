@@ -38,5 +38,4 @@ public class Employee {
         this.firstName=parts[0];
         this.lastName=parts[1];
     }
-
 }

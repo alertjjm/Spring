@@ -59,7 +59,7 @@ public class OrderController {
                         .withTitle("Method not allowed")
                         .withDetail("You can't cancel an ordr that is in the"+order.getStatus()+" status"));
     }
-    @PutMapping("/orders/{id}/complet")
+    @PutMapping("/orders/{id}/complete")
     ResponseEntity<?> complete(@PathVariable Long id){
         Order order=orderRepository.findById(id)
                 .orElseThrow(()->new OrderNotFoundException(id));
