@@ -1,9 +1,11 @@
 package com.example.springsecuritypractice.controller;
 
+import com.example.springsecuritypractice.config.auth.PrincipalDetails;
 import com.example.springsecuritypractice.model.User;
 import com.example.springsecuritypractice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +21,6 @@ public class IndexController {
     @GetMapping({"","/"})
     public String index(){
         return "index";
-    }
-    @GetMapping("/user")
-    @ResponseBody
-    public String user() {
-        return "유저 페이지입니다.";
     }
 
     @GetMapping("/admin")
@@ -58,6 +55,11 @@ public class IndexController {
         userRepository.save(user);
         System.out.println(user);
         return "redirect:/loginForm";
+    }
+    @GetMapping("/user")
+    public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails){
+        System.out.println("principalDetails: "+principalDetails.getUser());
+        return "user";
     }
     @Secured("ROLE_ADMIN")
     @GetMapping("/info")
