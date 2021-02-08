@@ -11,7 +11,7 @@ taco:
   discount:
     codes:
       abcdef: 10
-      
+
 #logging:
 #  level:
 #    org.springframework.data.rest: debug
@@ -24,12 +24,12 @@ spring:
 ---
 spring:
   profiles: prod
-  
+
   datasource:
     url: jdbc:mysql://localhost/tacocloud
     username: tacouser
     password: tacopassword
-    
+
 logging:
   level:
     tacos: WARN

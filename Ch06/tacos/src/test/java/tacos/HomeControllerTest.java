@@ -24,25 +24,25 @@ import tacos.data.OrderRepository;
 @Ignore("Unsure how to test with @DataJpaTest")
 public class HomeControllerTest {
 
-  @Autowired
-  private MockMvc mockMvc;
-  
-  @MockBean
-  private IngredientRepository ingredientRepository;
+    @Autowired
+    private MockMvc mockMvc;
 
-  @MockBean
-  private TacoRepository designRepository;
+    @MockBean
+    private IngredientRepository ingredientRepository;
 
-  @MockBean
-  private OrderRepository orderRepository;
+    @MockBean
+    private TacoRepository designRepository;
 
-  @Test
-  public void testHomePage() throws Exception {
-    mockMvc.perform(get("/"))
-      .andExpect(status().isOk())
-      .andExpect(view().name("home"))
-      .andExpect(content().string(
-          containsString("Welcome to...")));  
-  }
+    @MockBean
+    private OrderRepository orderRepository;
+
+    @Test
+    public void testHomePage() throws Exception {
+        mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("home"))
+                .andExpect(content().string(
+                        containsString("Welcome to...")));
+    }
 
 }
