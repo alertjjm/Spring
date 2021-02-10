@@ -1,13 +1,14 @@
 package com.example.jwtserver.config.auth;
 
 import com.example.jwtserver.model.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
-
+@Data
 public class PrincipalDetails implements UserDetails {
     private User user;
     public PrincipalDetails(User user){
@@ -16,11 +17,13 @@ public class PrincipalDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities=new ArrayList<>();
-        user.getRoleList().forEach(u->{authorities.add(()->u);});
+        user.getRoleList().forEach(u->{
+            System.out.println(u);
+            authorities.add(()-> u);});
         //List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
         //              .map(authority -> new SimpleGrantedAuthority(authority.getAuthorityName()))
         //              .collect(Collectors.toList()); 이렇게로도 표현가능
-        return null;
+        return authorities;
     }
 
     @Override
