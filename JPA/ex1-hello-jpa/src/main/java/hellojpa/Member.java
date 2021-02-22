@@ -7,9 +7,13 @@ import java.time.LocalDateTime;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "MEMBER_ID")
     private Long id;
-    @Column(nullable = false)
+    @Column(name ="USERNAME")
     private String name;
+    @ManyToOne
+    @JoinColumn(name="TEAM_ID")
+    private Team team;
     private int age;
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
@@ -22,6 +26,46 @@ public class Member {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public RoleType getRoleType() {
+        return roleType;
+    }
+
+    public void setRoleType(RoleType roleType) {
+        this.roleType = roleType;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {
