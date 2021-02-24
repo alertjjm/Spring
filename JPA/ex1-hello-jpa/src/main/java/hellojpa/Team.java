@@ -11,7 +11,7 @@ public class Team {
     @Column(name = "TEAM_ID")
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team")//mapped by 는 가짜매핑
     private List<Member> members=new ArrayList<>();
     public Long getId() {
         return id;
