@@ -1,18 +1,17 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-public class Team extends BaseEntity{
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn
+public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "TEAM_ID")
+    @GeneratedValue
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "team")//mapped by 는 가짜매핑
-    private List<Member> members=new ArrayList<>();
+    private int price;
+
     public Long getId() {
         return id;
     }
@@ -27,5 +26,13 @@ public class Team extends BaseEntity{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }
