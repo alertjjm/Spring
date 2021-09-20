@@ -1,7 +1,7 @@
 spring:
   profiles:
     active: local
-
+spring.batch.job.names: ${job.name:NONE}
 ---
 spring:
   datasource:
@@ -13,6 +13,7 @@ spring:
   config:
     activate:
       on-profile: local
+
 ---
 spring:
   datasource:
